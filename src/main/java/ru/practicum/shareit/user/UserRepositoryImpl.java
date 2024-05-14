@@ -1,6 +1,7 @@
 package ru.practicum.shareit.user;
 
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import ru.practicum.shareit.exception.UserEmailDuplicateException;
 import ru.practicum.shareit.exception.UserEmailValidationException;
 import ru.practicum.shareit.exception.UserNotFoundException;
@@ -44,10 +45,10 @@ public class UserRepositoryImpl implements UserRepository {
 
         User user = users.get(userId);
 
-        if (userDto.getName() != null) {
+        if (StringUtils.hasText(userDto.getName())) {
             user.setName(userDto.getName());
         }
-        if (userDto.getEmail() != null) {
+        if (StringUtils.hasText(userDto.getEmail())) {
             checkDuplicateEmail(userDto.getEmail(), userId);
             user.setEmail(userDto.getEmail());
         }

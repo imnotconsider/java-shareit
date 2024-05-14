@@ -2,6 +2,8 @@ package ru.practicum.shareit.item;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import ru.practicum.shareit.exception.ItemNotFoundException;
 import ru.practicum.shareit.exception.UserNotEnoughRights;
 import ru.practicum.shareit.exception.UserNotFoundException;
 import ru.practicum.shareit.item.dto.ItemDto;
@@ -36,7 +38,12 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     @Override
     public Item getItemById(int itemId) {
-        return items.get(itemId);
+        Item item = items.get(itemId);
+        if (item == null) {
+            throw new ItemNotFoundException(String.format("item with id=%d not found", itemId));
+        }
+
+        return item;
     }
 
     @Override
@@ -46,11 +53,11 @@ public class ItemRepositoryImpl implements ItemRepository {
             throw new UserNotEnoughRights("invalid owner id");
         }
 
-        if (itemDto.getName() != null) {
+        if (StringUtils.hasText(itemDto.getName())) {
             item.setName(itemDto.getName());
         }
 
-        if (itemDto.getDescription() != null) {
+        if (StringUtils.hasText(itemDto.getDescription())) {
             item.setDescription(itemDto.getDescription());
         }
 

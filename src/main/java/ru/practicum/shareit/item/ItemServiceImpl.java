@@ -2,6 +2,7 @@ package ru.practicum.shareit.item;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import ru.practicum.shareit.exception.ItemValidationException;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.model.Item;
@@ -20,10 +21,10 @@ public class ItemServiceImpl implements ItemService {
         if (itemDto.getAvailable() == null) {
             throw new ItemValidationException("available cannot be null");
         }
-        if (itemDto.getName() == null || itemDto.getName().isEmpty()) {
+        if (!StringUtils.hasText(itemDto.getName())) {
             throw new ItemValidationException("name cannot be empty");
         }
-        if (itemDto.getDescription() == null || itemDto.getDescription().isEmpty()) {
+        if (!StringUtils.hasText(itemDto.getDescription())) {
             throw new ItemValidationException("description cannot be empty");
         }
 
@@ -43,7 +44,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<ItemDto> getItemsByText(String searchText) {
-        if (searchText.isBlank()) {
+        if (!StringUtils.hasText(searchText)) {
             return new ArrayList<>();
         }
 

@@ -23,7 +23,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleUserValidationExceptionException(final UserValidationException e) {
+    public ErrorResponse handleUserValidationException(final UserValidationException e) {
         return new ErrorResponse(String.format("user validation error: %s", e.getMessage()));
     }
 
@@ -43,5 +43,17 @@ public class ErrorHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleUserNotFoundException(final UserNotFoundException e) {
         return new ErrorResponse(String.format("user error: %s", e.getMessage()));
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(HttpStatus.BAD_GATEWAY)
+    public ErrorResponse handleException(final RuntimeException e) {
+        return new ErrorResponse(String.format("server error: %s", e.getMessage()));
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleItemNotFoundException(final ItemNotFoundException e) {
+        return new ErrorResponse(String.format("item error: %s", e.getMessage()));
     }
 }
