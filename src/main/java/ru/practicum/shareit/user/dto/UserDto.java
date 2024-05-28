@@ -1,22 +1,19 @@
-package ru.practicum.shareit.item.dto;
+package ru.practicum.shareit.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
-
-/**
- * TODO Sprint add-controllers.
- */
+import javax.validation.constraints.Email;
 
 @Data
 @Builder
 @AllArgsConstructor
-public class ItemDto {
+public class UserDto {
     @Min(value = 1, message = "id cannot be < 1")
-    private int id;
+    private final int id;
     private String name;
-    private String description;
-    private Boolean available;
+    @Email(message = "incorrect email")
+    private String email;
 }
