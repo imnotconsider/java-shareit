@@ -1,19 +1,18 @@
 package ru.practicum.shareit.user.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
-@AllArgsConstructor
 public class UserDto {
-    @Min(value = 1, message = "id cannot be < 1")
-    private final int id;
+    private final long id;
+    @NotNull(message = "name cannot be empty")
     private String name;
     @Email(message = "incorrect email")
+    @NotNull(message = "email cannot be empty")
     private String email;
 }
