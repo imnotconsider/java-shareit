@@ -17,7 +17,6 @@ import java.util.Collection;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
     private final UserRepository repository;
 
@@ -28,25 +27,6 @@ public class UserServiceImpl implements UserService {
         }
         return UserMapper.userToDto(repository.save(UserMapper.dtoToUser(userDto)));
     }
-
-//    @Override
-//    @Transactional
-//    public UserDto createUser(UserDto userDto) {
-//        if (!StringUtils.hasText(userDto.getName())) {
-//            throw new UserValidationException("name cannot be empty");
-//        }
-//
-//        emailValidation(userDto.getEmail());
-//        User user = repository.save(UserMapper.dtoToUser(userDto));
-//        return UserMapper.userToDto(user);
-//
-//        //try {
-//        //    User user = repository.save(UserMapper.dtoToUser(userDto));
-//        //    return UserMapper.userToDto(user);
-//        //} catch (DataIntegrityViolationException e) {
-//        //    throw new UserEmailDuplicateException(String.format("email '%s' is already registered", userDto.getEmail()));
-//        //}
-//    }
 
     @Override
     @Transactional
@@ -75,6 +55,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteUser(long userId) {
         repository.deleteUserById(userId);
     }
