@@ -31,7 +31,7 @@ public class BookingController {
     public BookingDto approveBooking(@RequestHeader("X-Sharer-User-Id") long userId,
                                      @PathVariable long bookingId,
                                      @RequestParam Boolean approved) {
-        log.info("Booking controller | approveBooking | request: userId({}), bookingId({}), approved({})}", userId, bookingId, approved);
+        log.info("Booking controller | approveBooking | request: userId({}), bookingId({}), approved({})", userId, bookingId, approved);
         BookingDto booking = bookingService.approveBooking(bookingId, approved, userId);
         log.info("Booking controller | approveBooking | answer: approved {} ", booking);
         return booking;
