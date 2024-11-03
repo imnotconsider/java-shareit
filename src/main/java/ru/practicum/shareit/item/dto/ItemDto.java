@@ -3,8 +3,10 @@ package ru.practicum.shareit.item.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import ru.practicum.shareit.comment.model.Comment;
 
-import javax.validation.constraints.Min;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * TODO Sprint add-controllers.
@@ -14,9 +16,11 @@ import javax.validation.constraints.Min;
 @Builder
 @AllArgsConstructor
 public class ItemDto {
-    @Min(value = 1, message = "id cannot be < 1")
-    private int id;
+    private long id;
     private String name;
     private String description;
     private Boolean available;
+    private final LocalDateTime lastBooking;
+    private final LocalDateTime nextBooking;
+    private final List<Comment> comments;
 }

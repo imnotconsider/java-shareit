@@ -56,4 +56,28 @@ public class ErrorHandler {
     public ErrorResponse handleItemNotFoundException(final ItemNotFoundException e) {
         return new ErrorResponse(String.format("item error: %s", e.getMessage()));
     }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleBookingDateException(final BookingDateException e) {
+        return new ErrorResponse(String.format("booking error: %s", e.getMessage()));
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleItemNotAvailableException(final ItemNotAvailableException e) {
+        return new ErrorResponse(String.format("item error: %s", e.getMessage()));
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleBookingNotFoundException(final BookingNotFoundException e) {
+        return new ErrorResponse(String.format("booking error: %s", e.getMessage()));
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleBookingNotAvailableExceptionException(final BookingNotAvailableException e) {
+        return new ErrorResponse(String.format("booking error: %s", e.getMessage()));
+    }
 }
